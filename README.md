@@ -19,8 +19,8 @@ This package is designed for:
 - small tests on a local workstation or laptop;
 - reproducible runs controlled by YAML configuration files;
 - monitoring the memory use of each processing stage;
-- keeping dark- and light-data processing under one project structure.
-- restarting from selected intermediate products;
+- keeping dark- and light-data processing under one project structure;
+- restarting from selected intermediate products.
 
 > Read [`KNOWN_ISSUES.md`](KNOWN_ISSUES.md) before using generated files for scientific interpretation. This version focuses on structural integration and reproducible execution; it does not automatically resolve every scientific or performance concern inherited from the original packages.
 
@@ -146,10 +146,10 @@ Light-data preprocessing normally uses (Example):
 ```text
 upto1ps.params
 upto1ps.stream
-delays_original.mat
+tag_delay_all.xlsx
 ```
 
-and produces delay-resolved sparse reflection matrices.
+The tag-delay file can also be supplied as `tag_delay_all.xlsx.zip`. The light pipeline uses the event tag shared by the `.stream`, `.params`, and tag-delay table to attach a pump-probe delay to each matched snapshot, then produces delay-resolved sparse reflection matrices.
 
 | Step | Main purpose | Main input | Main output |
 |---|---|---|---|
@@ -158,7 +158,7 @@ and produces delay-resolved sparse reflection matrices.
 | C3 | Extract indexed reflections | Light `.stream` file | Per-snapshot `h k l I` files |
 | C4 | Find the maximum Miller-index range | C3 reflection files | `h_max`, `k_max`, `l_max` |
 | C5 | Compute reflection redundancy | C3 reflection files | Reflection-redundancy array |
-| C6 | Combine light-data metadata | C1, C2, and `delays_original.mat` | Snapshot metadata including delay |
+| C6 | Combine light-data metadata by snapshot/event keys | C1, C2, and a tag-delay table | Snapshot metadata including delay |
 | C7 | Pack the final reflection matrices | C3, C5, and C6 | Delay-sorted sparse `T` and `M` matrices |
 | C8 | Uniformize the delay distribution | C7 file | Reduced, delay-balanced HDF5 file |
 | C9 | Apply the LPF correction | C8 file | LPF-corrected HDF5 file |
@@ -189,6 +189,64 @@ processing:
   make_drl_mask: true
   use_drl_mask: true
 ```
+
+#### Tag-delay input and C6 matching
+
+The preferred delay input is a lookup table containing at least these columns:
+
+```text
+tag_number,delay
+```
+
+An optional `power` column is allowed but is not used by the current preprocessing stages:
+
+```text
+tag_number,delay,power
+1497731226,203.3333333348,118.906
+```
+
+The reader supports:
+
+```text
+.xlsx
+.xlsm
+.csv
+.txt
+.tsv
+.zip   # archive containing exactly one supported table file
+.mat   # legacy delays_original.mat compatibility
+```
+
+Both a normal multi-column Excel worksheet and the supplied one-cell CSV-style worksheet are accepted. In the one-cell form, each row contains text such as `1497731226,203.3333333348,118.906` in column A.
+
+```text
+C2 stream metadata
+(runID, eventID, nRefl, DRL)
+            |
+            | join by (runID, eventID)
+            v
+C1 partialator metadata
+(runID, eventID, OSF, relB)
+            |
+            | join by eventID == tag_number
+            v
+tag-delay table
+(tag_number, delay)
+```
+
+The generated C6 HDF5 file also records matching statistics in attributes including:
+
+```text
+tag_delay_source
+matched_snapshots
+missing_params_snapshots
+missing_delay_snapshots
+duplicate_identical_params
+duplicate_identical_tags
+```
+
+Conflicting duplicate tags or conflicting duplicate `(runID, eventID)` parameter records cause an error rather than being silently overwritten.
+
 
 ### Dark-data pipeline: C1-C9
 
@@ -291,7 +349,7 @@ conda deactivate
 Make sure the environment is active:
 
 ```bash
-python -c "import numpy, scipy, h5py, yaml, pyxtal; print('Environment OK')"
+python -c "import numpy, scipy, h5py, yaml, pyxtal, openpyxl; print('Environment OK')"
 ```
 
 Expected output:
@@ -344,7 +402,7 @@ C1 C2 C3 C4 C5 C6 C7 C8 C9
 
 ## 4. Add input files
 
-Copy the required files from the existing project input folders into this package's `inputs/` directory. `.stream` files are usually much larger than `.params` or `.mat` files and may take longer to transfer.
+Copy the required files from the existing project input folders into this package's `inputs/` directory. `.stream` files are usually much larger than `.params` or `.xlsx` (tag-delay tables) files and may take longer to transfer.
 
 For large files, `rsync` is recommended because it shows progress and can resume an interrupted transfer:
 
@@ -377,7 +435,7 @@ rsync -ah --info=progress2 \
 Example input files:
 
 ```text
-inputs/delays_original.mat
+inputs/tag_delay_all.xlsx
 inputs/upto1ps.params
 inputs/upto1ps.stream
 ```
@@ -385,7 +443,7 @@ inputs/upto1ps.stream
 Example commands on Mortimer:
 
 ```bash
-cp "$HOME/Data-cxfel/phytochrome2026/dataPhyto_reduction_light/inputs/delays_original.mat" \
+cp "$HOME/Data-cxfel/phytochrome2026/dataPhyto_reduction_light/inputs/tag_delay_all.xlsx" \
    "$HOME/Data-cxfel/tr_sfx_preprocess_unified/inputs/"
 
 cp "$HOME/Data-cxfel/phytochrome2026/dataPhyto_reduction_light/inputs/upto1ps.params" \
@@ -420,7 +478,11 @@ dataset:
 inputs:
   stream: inputs/upto1ps.stream
   params: inputs/upto1ps.params
-  delays: inputs/delays_original.mat
+  tag_delay_file: inputs/tag_delay_all.xlsx
+
+# Optional. Omit this block to use the first worksheet.
+delay_input:
+  sheet: in
 
 output:
   directory: outputs/light_upto1ps
@@ -429,6 +491,8 @@ pipeline:
   start_step: C1
   stop_step: C13
 ```
+
+`delay_input.sheet` is optional. When it is omitted, the first worksheet is used. For the supplied workbook, the worksheet is named `in`.
 
 The remaining light sections define the unit cell, wavelength, delay selection, random seed, DRL-mask settings, negative-value handling, and HKL averaging.
 
@@ -632,6 +696,21 @@ Depending on the processing stage, common light-data metadata datasets include:
 
 C8 also records both MATLAB-style 1-based indices and Python-style 0-based indices for selected snapshots.
 
+The C6 HDF5 file contains the joined metadata datasets:
+
+```text
+/runID
+/eventID
+/nBrg
+/DRL
+/delay
+/OSF
+/relB
+```
+
+It also stores the tag-delay source path and C6 matching counts as HDF5 attributes. Check these attributes and the printed C6 summary when the final snapshot count is smaller than the number of `.params` or `.stream` records.
+
+
 ### Dark-data outputs
 
 A full dark-data run creates intermediate products similar to:
@@ -779,6 +858,9 @@ pytest -q
 The tests cover:
 
 - dark/light pipeline selection;
+- reading the supplied one-cell CSV-style `.xlsx` tag-delay table;
+- reading a `.zip` archive containing the tag-delay workbook;
+- C6 key-based matching when C1 and C2 use different row orders;
 - a small synthetic light C8-C13 workflow;
 - a small synthetic dark C8-C9 workflow.
 
@@ -881,8 +963,21 @@ Example: light data
 ```bash
 ls -lh inputs/upto1ps.params
 ls -lh inputs/upto1ps.stream
-ls -lh inputs/delays_original.mat
+ls -lh inputs/tag_delay_all.xlsx
+# or
+ls -lh inputs/tag_delay_all.xlsx.zip
 ```
+
+### Problem: C6 cannot find the Excel worksheet
+
+For the supplied workbook, use:
+
+```yaml
+delay_input:
+  sheet: in
+```
+
+To use the first worksheet regardless of its name, remove the `delay_input` block. If the configured name is not found, C6 reports the available worksheet names.
 
 ### Problem: job killed by memory limit
 
