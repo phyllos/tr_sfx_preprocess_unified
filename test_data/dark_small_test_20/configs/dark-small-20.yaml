@@ -1,0 +1,30 @@
+dataset:
+  mode: dark
+  name: dark_small_20
+
+inputs:
+  stream: inputs/dark-small-20.stream
+  params: inputs/dark-small-20.params
+
+output:
+  directory: outputs/dark_small_20
+
+pipeline:
+  start_step: C1
+  stop_step: C9
+
+crystal:
+  space_group: 19
+  a: 54.95
+  b: 116.50
+  c: 117.70
+
+advanced:
+  h_max: 30
+  k_max: 60
+  l_max: 60
+
+processing:
+  data_type: Intensity
+  remove_negative_pixels: false
+  generate_hkl_average: true

@@ -1,0 +1,41 @@
+dataset:
+  mode: light
+  name: light_small_100
+
+inputs:
+  stream: inputs/light-small-100.stream
+  params: inputs/light-small-100.params
+  tag_delay_file: inputs/light-small-tag-delay-100.xlsx
+
+# The supplied workbook uses worksheet "in".
+delay_input:
+  sheet: in
+
+output:
+  # A new directory avoids mixing results with the 20-chunk test run.
+  directory: outputs/light_small_100
+
+pipeline:
+  start_step: C1
+  stop_step: C13
+
+crystal:
+  space_group: 19
+  a: 54.22
+  b: 115.78
+  c: 117.08
+  wavelength: 1.77
+
+selection:
+  # Keep this at 1 for the local smoke test. The production value 155
+  # requires many snapshots for every selected delay.
+  samples_per_delay: 1
+  tmin: -84
+  tmax: 550
+  random_seed: 123
+
+processing:
+  remove_negative_pixels: false
+  make_drl_mask: false
+  use_drl_mask: false
+  generate_hkl_average: true
