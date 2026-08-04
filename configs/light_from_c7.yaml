@@ -1,0 +1,31 @@
+dataset:
+  mode: light
+  name: upto1ps
+
+inputs:
+  c7_file: inputs/DATA_upto1ps/dataPhyto_upto1ps_int_sortdelay_nS135041_nBrg62530.mat
+
+output:
+  directory: outputs/light_from_c7
+
+pipeline:
+  start_step: C8
+  stop_step: C13
+
+crystal:
+  a: 54.22
+  b: 115.78
+  c: 117.08
+  wavelength: 1.77
+
+selection:
+  samples_per_delay: 155
+  tmin: -84
+  tmax: 550
+  random_seed: 123
+
+processing:
+  remove_negative_pixels: false
+  make_drl_mask: false
+  use_drl_mask: false
+  generate_hkl_average: true

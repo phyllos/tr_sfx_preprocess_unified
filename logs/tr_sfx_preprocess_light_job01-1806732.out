@@ -1,0 +1,90 @@
+========================================
+Job started at Thu Jul 23 14:05:40 CDT 2026
+Job ID: 1806732
+Running on execute-4003.mortimer.hpc.uwm.edu
+========================================
+Working directory: /home/uwm/gengh/Data-cxfel/tr_sfx_preprocess_unified
+Conda env: tr_sfx_preprocess
+Python: /home/uwm/gengh/Data-cxfel/conda/envs/tr_sfx_preprocess/bin/python
+========================================
+
+========================================================================
+Unified TR-SFX preprocessing
+mode: light
+config: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/configs/light_full.yaml
+steps: C1 -> C2 -> C3 -> C4 -> C5 -> C6 -> C7 -> C8 -> C9 -> C10 -> C11 -> C12 -> C13
+initial RSS: 0.06 GB | peak: 0.06 GB
+========================================================================
+[START] light C1 | PID=1502854 | current=0.06 GB | process_peak=0.06 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/partialator_params_phyto_upto1ps.hdf5
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/partialator_params_phyto_upto1ps.dat
+[ END ] light C1 | elapsed=0.4s | current=0.07 GB | step_peak=0.06 GB | process_peak=0.09 GB
+[START] light C2 | PID=1502854 | current=0.07 GB | process_peak=0.09 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/merged_snapshotInfo_phyto_upto1ps.hdf5
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/merged_snapshotInfo_phyto_upto1ps.dat
+[ END ] light C2 | elapsed=13.4s | current=0.07 GB | step_peak=8.16 GB | process_peak=8.17 GB
+[START] light C3 | PID=1502854 | current=0.07 GB | process_peak=8.17 GB
+[MONITOR] light C3 | elapsed=31s | current=8.15 GB | step_peak=8.15 GB | process_peak=8.17 GB
+[MONITOR] light C3 | elapsed=61s | current=8.15 GB | step_peak=8.15 GB | process_peak=8.17 GB
+[MONITOR] light C3 | elapsed=91s | current=8.15 GB | step_peak=8.15 GB | process_peak=8.17 GB
+[MONITOR] light C3 | elapsed=121s | current=8.15 GB | step_peak=8.15 GB | process_peak=8.17 GB
+[MONITOR] light C3 | elapsed=151s | current=8.15 GB | step_peak=8.15 GB | process_peak=8.17 GB
+[MONITOR] light C3 | elapsed=182s | current=8.15 GB | step_peak=8.15 GB | process_peak=8.17 GB
+Saved 139762 hklI files in /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/sacla2021_upto1ps_hklI
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/upto1ps_snapshotInfo.dat
+[ END ] light C3 | elapsed=191.2s | current=0.07 GB | step_peak=8.15 GB | process_peak=8.17 GB
+[START] light C4 | PID=1502854 | current=0.07 GB | process_peak=8.17 GB
+[MONITOR] light C4 | elapsed=30s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/hkl_max_upto1ps.dat: h_max=29, k_max=63, l_max=67
+[ END ] light C4 | elapsed=33.6s | current=0.08 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[START] light C5 | PID=1502854 | current=0.08 GB | process_peak=8.17 GB
+[MONITOR] light C5 | elapsed=30s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[MONITOR] light C5 | elapsed=60s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/redundancy_upto1ps.hdf5
+[ END ] light C5 | elapsed=76.5s | current=0.08 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[START] light C6 | PID=1502854 | current=0.08 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/merged_snapshotInfo_phyto_upto1ps_allInfo.hdf5
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/merged_snapshotInfo_phyto_upto1ps_allInfo.dat
+[ END ] light C6 | elapsed=0.4s | current=0.09 GB | step_peak=0.08 GB | process_peak=8.17 GB
+[START] light C7 | PID=1502854 | current=0.09 GB | process_peak=8.17 GB
+[MONITOR] light C7 | elapsed=30s | current=1.47 GB | step_peak=1.47 GB | process_peak=8.17 GB
+[MONITOR] light C7 | elapsed=60s | current=2.80 GB | step_peak=2.80 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_int_sortdelay_nS135041_nBrg62530.hdf5
+[ END ] light C7 | elapsed=84.2s | current=0.10 GB | step_peak=4.47 GB | process_peak=8.17 GB
+[START] light C8 | PID=1502854 | current=0.10 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C8_unifdelay.hdf5
+[ END ] light C8 | elapsed=2.2s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[START] light C9 | PID=1502854 | current=0.10 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C9_LPF.hdf5
+[ END ] light C9 | elapsed=1.6s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[START] light C10 | PID=1502854 | current=0.10 GB | process_peak=8.17 GB
+[ END ] light C10 | elapsed=0.0s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[START] light C11 | PID=1502854 | current=0.10 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C11_LPF_DRL.hdf5
+[ END ] light C11 | elapsed=1.2s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[START] light C12 | PID=1502854 | current=0.10 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C12_LPF_DRL_SCL_AVG.hkl
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C12_LPF_DRL_SCL.hdf5
+[ END ] light C12 | elapsed=2.1s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+[START] light C13 | PID=1502854 | current=0.10 GB | process_peak=8.17 GB
+Saved /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C13_LPF_DRL_SCL_BST.hdf5
+[ END ] light C13 | elapsed=1.6s | current=0.10 GB | step_peak=0.10 GB | process_peak=8.17 GB
+========================================================================
+Pipeline complete
+C1_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/partialator_params_phyto_upto1ps.hdf5
+C2_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/merged_snapshotInfo_phyto_upto1ps.hdf5
+C3_hklI_folder: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/sacla2021_upto1ps_hklI
+C4_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/hkl_max_upto1ps.dat
+C5_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/redundancy_upto1ps.hdf5
+C6_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/merged_snapshotInfo_phyto_upto1ps_allInfo.hdf5
+C7_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_int_sortdelay_nS135041_nBrg62530.hdf5
+C8_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C8_unifdelay.hdf5
+C9_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C9_LPF.hdf5
+C11_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C11_LPF_DRL.hdf5
+C12_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C12_LPF_DRL_SCL.hdf5
+C13_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/light_upto1ps/dataPhyto_upto1ps_C13_LPF_DRL_SCL_BST.hdf5
+final RSS: 0.10 GB | peak: 8.17 GB
+
+========================================
+Job finished at Thu Jul 23 14:12:29 CDT 2026
+========================================

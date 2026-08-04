@@ -1,0 +1,48 @@
+# ---------- OS / editor ----------
+.DS_Store
+*~
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.so
+
+# ---------- Conda / env ----------
+conda/
+.env
+.venv/
+venv/
+env/
+.envrc
+
+# ---------- Logs ----------
+logs/**
+!logs/.gitkeep
+!logs/tr_sfx_preprocess_dark_job01-1806726.err
+!logs/tr_sfx_preprocess_dark_job01-1806726.out
+!logs/tr_sfx_preprocess_light_job01-1806732.err
+!logs/tr_sfx_preprocess_light_job01-1806732.out
+
+# ---------- Results metric ----------
+!results_metric/.gitkeep
+
+# ---------- Outputs ----------
+outputs/**
+!outputs/.gitkeep
+
+# ---------- Large inputs / raw data ----------
+inputs/**/*.stream
+inputs/**/*.params
+inputs/**/*.mat
+inputs/**/*.h5
+inputs/**/*.hdf5
+inputs/**/*.hkl
+inputs/**/*.xlsx
+inputs/**/*.xlsm
+inputs/**/*.csv
+inputs/**/*.tsv
+inputs/**/*.zip
+
+# ---------- Optional: local scratch / temp ----------
+tmp/
+scratch/

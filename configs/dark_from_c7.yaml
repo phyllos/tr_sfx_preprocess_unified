@@ -1,0 +1,25 @@
+dataset:
+  mode: dark
+  name: dark_restart
+
+inputs:
+  c6_file: outputs/dark_clean_2024/PARAMETERS_0/merged_snapshotInfo_dark_allInfo.hdf5
+  c7_file: outputs/dark_clean_2024/dark-clean-2024_PreProcessed_Data_0/dark_Intensity_sortEvent_nS00000_nBrg00000.hdf5
+  c7_directory: outputs/dark_clean_2024/dark-clean-2024_PreProcessed_Data_0
+
+output:
+  directory: outputs/dark_restart
+
+pipeline:
+  start_step: C8
+  stop_step: C9
+
+crystal:
+  a: 78.1
+  b: 78.1
+  c: 38.4
+
+processing:
+  data_type: Intensity
+  remove_negative_pixels: false
+  generate_hkl_average: true

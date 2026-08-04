@@ -1,0 +1,34 @@
+dataset:
+  mode: light
+  name: upto1ps
+
+inputs:
+  stream: inputs/upto1ps.stream
+  params: inputs/upto1ps.params
+  delays: inputs/delays_original.mat
+
+output:
+  directory: outputs/light_upto1ps
+
+pipeline:
+  start_step: C1
+  stop_step: C13
+
+crystal:
+  space_group: 19
+  a: 54.22
+  b: 115.78
+  c: 117.08
+  wavelength: 1.77
+
+selection:
+  samples_per_delay: 155
+  tmin: -84
+  tmax: 550
+  random_seed: 123
+
+processing:
+  remove_negative_pixels: false
+  make_drl_mask: false
+  use_drl_mask: false
+  generate_hkl_average: true

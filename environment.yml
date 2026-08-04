@@ -1,0 +1,13 @@
+name: tr_sfx_preprocess
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.14
+  - numpy
+  - scipy
+  - h5py
+  - pyyaml
+  - pyxtal
+  - matplotlib
+  - pytest

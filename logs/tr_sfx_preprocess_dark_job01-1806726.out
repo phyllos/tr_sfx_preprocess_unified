@@ -1,0 +1,72 @@
+========================================
+Job started at Thu Jul 23 13:19:58 CDT 2026
+Job ID: 1806726
+Running on execute-4003.mortimer.hpc.uwm.edu
+========================================
+Working directory: /home/uwm/gengh/Data-cxfel/tr_sfx_preprocess_unified
+Conda env: tr_sfx_preprocess
+Python: /home/uwm/gengh/Data-cxfel/conda/envs/tr_sfx_preprocess/bin/python
+========================================
+
+========================================================================
+Unified TR-SFX preprocessing
+mode: dark
+config: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/configs/dark_full.yaml
+steps: C1 -> C2 -> C3 -> C4 -> C5 -> C6 -> C7 -> C8 -> C9
+initial RSS: 0.03 GB | peak: 0.03 GB
+========================================================================
+[START] dark C1 | PID=1502156 | current=0.03 GB | process_peak=0.03 GB
+[progress] Parsing parameters...
+[ END ] dark C1 | elapsed=0.1s | current=0.05 GB | step_peak=0.03 GB | process_peak=0.05 GB
+[START] dark C2 | PID=1502156 | current=0.05 GB | process_peak=0.05 GB
+[ END ] dark C2 | elapsed=11.1s | current=0.23 GB | step_peak=2.96 GB | process_peak=3.05 GB
+[START] dark C3 | PID=1502156 | current=0.23 GB | process_peak=3.05 GB
+[progress] Generating asymmetric unit...
+[MONITOR] dark C3 | elapsed=30s | current=0.39 GB | step_peak=0.39 GB | process_peak=3.05 GB
+[progress] Parsing stream file...
+[MONITOR] dark C3 | elapsed=60s | current=3.31 GB | step_peak=3.31 GB | process_peak=3.31 GB
+[MONITOR] dark C3 | elapsed=90s | current=3.31 GB | step_peak=3.31 GB | process_peak=3.31 GB
+Parsing finished in 66.24 seconds.
+[ END ] dark C3 | elapsed=119.4s | current=0.31 GB | step_peak=3.31 GB | process_peak=3.31 GB
+[START] dark C4 | PID=1502156 | current=0.31 GB | process_peak=3.31 GB
+[progress] Finding min/max...
+[ END ] dark C4 | elapsed=12.2s | current=0.31 GB | step_peak=0.31 GB | process_peak=3.31 GB
+[START] dark C5 | PID=1502156 | current=0.31 GB | process_peak=3.31 GB
+[progress] Generating redundancy...
+[ END ] dark C5 | elapsed=14.2s | current=0.31 GB | step_peak=0.31 GB | process_peak=3.31 GB
+[START] dark C6 | PID=1502156 | current=0.31 GB | process_peak=3.31 GB
+[progress] Merging params and stream data...
+[ END ] dark C6 | elapsed=0.2s | current=0.32 GB | step_peak=0.31 GB | process_peak=3.31 GB
+[START] dark C7 | PID=1502156 | current=0.32 GB | process_peak=3.31 GB
+[progress] Packing final dark matrix...
+[MONITOR] dark C7 | elapsed=30s | current=21.77 GB | step_peak=21.77 GB | process_peak=21.77 GB
+[MONITOR] dark C7 | elapsed=60s | current=42.96 GB | step_peak=42.96 GB | process_peak=42.96 GB
+[MONITOR] dark C7 | elapsed=90s | current=0.69 GB | step_peak=45.20 GB | process_peak=45.56 GB
+[ END ] dark C7 | elapsed=90.4s | current=0.32 GB | step_peak=45.20 GB | process_peak=45.56 GB
+[START] dark C8 | PID=1502156 | current=0.32 GB | process_peak=45.56 GB
+[progress] Applying scaling parameters...
+[MONITOR] dark C8 | elapsed=30s | current=62.27 GB | step_peak=79.97 GB | process_peak=84.64 GB
+[ END ] dark C8 | elapsed=45.8s | current=0.32 GB | step_peak=79.97 GB | process_peak=84.64 GB
+[START] dark C9 | PID=1502156 | current=0.32 GB | process_peak=84.64 GB
+[progress] Boosting matrix...
+[ END ] dark C9 | elapsed=1.2s | current=0.32 GB | step_peak=0.32 GB | process_peak=84.64 GB
+========================================================================
+Pipeline complete
+C1_directory: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/PARAMETERS_0
+C1_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/PARAMETERS_0/partialator_params_dark-clean-2024.hdf5
+C2_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/PARAMETERS_0/merged_snapshot_info_dark_clean_2024_dark.hdf5
+C3_directory: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/individual_snapshots_0
+C3_summary: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/snapshotInfo0.dat
+C4_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/max_vals.hdf5
+C5_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/redundancy.hdf5
+C6_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/merged_snapshotInfo_dark_allInfo.hdf5
+C7_directory: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/dark-clean-2024_PreProcessed_Data_0
+C7_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/dark-clean-2024_PreProcessed_Data_0/dark_Intensity_sortEvent_nS48478_nBrg61940.hdf5
+C8_hdf5_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/dark-clean-2024_PreProcessed_Data_0/data_dark_int_sortEvent_scl_nS48478_nBrg61940.hdf5
+C8_hkl_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/dark-clean-2024_PreProcessed_Data_0/data_dark_int_sortEvent_scl_avg_nS48478_nBrg61940.hkl
+C9_file: /raid-4002/cxfel/uwm/gengh/tr_sfx_preprocess_unified/outputs/dark_clean_2024/dark-clean-2024_PreProcessed_Data_0/data_dark_int_sortEvent_scl_bst_nS48478_nBrg61940.hdf5
+final RSS: 0.32 GB | peak: 84.64 GB
+
+========================================
+Job finished at Thu Jul 23 13:24:53 CDT 2026
+========================================
