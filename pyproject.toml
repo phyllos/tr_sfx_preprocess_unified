@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tr-sfx-preprocess-unified"
-version = "0.1.0"
+version = "0.2.0"
 description = "Unified dark/light TR-SFX preprocessing driver retaining the legacy C-step functions"
 requires-python = ">=3.11"
-dependencies = ["numpy", "scipy", "h5py", "PyYAML", "pyxtal"]
+dependencies = ["numpy", "scipy", "h5py", "PyYAML", "pyxtal", "openpyxl"]
 
 [project.scripts]
 tr-sfx-preprocess = "driver:main"

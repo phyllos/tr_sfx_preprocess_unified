@@ -5,7 +5,11 @@ dataset:
 inputs:
   stream: inputs/upto1ps.stream
   params: inputs/upto1ps.params
-  delays: inputs/delays_original.mat
+  tag_delay_file: inputs/tag_delay_all.xlsx
+
+# Optional. Omit this block to use the first worksheet.
+delay_input:
+  sheet: in
 
 output:
   directory: outputs/light_upto1ps

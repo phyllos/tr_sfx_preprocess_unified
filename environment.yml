@@ -7,6 +7,7 @@ dependencies:
   - numpy
   - scipy
   - h5py
+  - openpyxl
   - pyyaml
   - pyxtal
   - matplotlib

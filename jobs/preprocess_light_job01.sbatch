@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=tr_sfx_preprocess_light_job01
 #SBATCH --partition=cxfel
-#SBATCH --nodelist=execute-4003
+#SBATCH --nodelist=execute-4005
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4

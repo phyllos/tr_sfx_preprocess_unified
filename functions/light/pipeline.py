@@ -38,7 +38,21 @@ def c4(state):
 def c5(state):
     cfg=state["config"]; path=find_hkl_redundancy_light(state["artifacts"]["C3_hklI_folder"], state["artifacts"]["C4_file"], cfg["dataset"]["name"], str(cfg["output"]["directory"])); state["artifacts"]["C5_file"]=str(path)
 def c6(state):
-    cfg=state["config"]; path=pack_phyto_allInfo_light(state["artifacts"]["C2_file"], state["artifacts"]["C1_file"], str(cfg["inputs"]["delays"]), cfg["dataset"]["name"], str(cfg["output"]["directory"])); state["artifacts"]["C6_file"]=str(path)
+    cfg = state["config"]
+    inputs = cfg["inputs"]
+    tag_delay_file = inputs.get("tag_delay_file") or inputs.get("delays")
+    if tag_delay_file is None:
+        raise KeyError("Light C6 requires inputs.tag_delay_file (or legacy inputs.delays).")
+    delay_cfg = cfg.get("delay_input", {})
+    path = pack_phyto_allInfo_light(
+        state["artifacts"]["C2_file"],
+        state["artifacts"]["C1_file"],
+        str(tag_delay_file),
+        cfg["dataset"]["name"],
+        str(cfg["output"]["directory"]),
+        delay_cfg.get("sheet"),
+    )
+    state["artifacts"]["C6_file"] = str(path)
 def c7(state):
     cfg=state["config"]; dat=str(Path(state["artifacts"]["C6_file"]).with_suffix(".dat")); path=pack_phyto_final_light(dat, state["artifacts"]["C5_file"], state["artifacts"]["C3_hklI_folder"], cfg["dataset"]["name"], str(cfg["output"]["directory"]), bool(cfg.get("processing",{}).get("remove_negative_pixels",False))); state["artifacts"]["C7_file"]=str(path)
 def c8(state):
