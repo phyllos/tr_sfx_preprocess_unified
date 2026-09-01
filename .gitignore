@@ -26,9 +26,11 @@ logs/**
 # ---------- Results metric ----------
 !results_metric/.gitkeep
 
-# ---------- Outputs ----------
-outputs/**
-!outputs/.gitkeep
+# ---------- Test config files ----------
+configs/dark-small-100.yaml
+configs/dark-small-20.yaml
+configs/light-small-100.yaml
+configs/light-small-20.yaml
 
 # ---------- Large inputs / raw data ----------
 inputs/**/*.stream
@@ -42,6 +44,10 @@ inputs/**/*.xlsm
 inputs/**/*.csv
 inputs/**/*.tsv
 inputs/**/*.zip
+
+# ---------- Outputs ----------
+outputs/**
+!outputs/.gitkeep
 
 # ---------- Optional: local scratch / temp ----------
 tmp/
