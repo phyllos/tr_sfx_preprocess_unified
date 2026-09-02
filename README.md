@@ -1,5 +1,20 @@
 # Unified TR-SFX Dark/Light Preprocessing Package
 
+Table of Contents
+- [Background](#background)
+- [Main features](#main-features)
+- [Project structure](#project-structure)
+- [Processing workflows](#processing-workflows)
+- [Getting started](#getting-started)
+- [Output files, HDF5 file organization and memory logs](#output-files-hdf5-file-organization-and-memory-logs)
+- [Run the tests](#run-the-tests)
+- [Additional documentation](#additional-documentation)
+- [Starting from an intermediate step](#starting-from-an-intermediate-step)
+- [Common problems](#common-problems)
+
+
+-=- -=- -=- -=- -=- -=- -=- -=- 
+
 ## Background
 
 This package provides one configuration-driven interface for preprocessing **dark** and **light** time-resolved serial femtosecond crystallography (TR-SFX) datasets.
@@ -73,7 +88,7 @@ Memory is sampled approximately every 5 seconds and reported approximately every
 
 ### Local and SLURM execution
 
-The same driver and configuration files can be used for small local tests and full Mortimer jobs.
+The same driver and configuration files can be used for small local tests and full HPC (Mortimer) jobs.
 
 ### Intermediate restart
 
@@ -283,14 +298,20 @@ The unified driver selects one numbered pipeline according to `dataset.mode`. It
 
 ---
 
-# Getting started
+## Getting started
 
-## 1. Enter the package directory
+### 1. Enter the package directory
 
-On Mortimer:
+On HPC (Mortimer):
 
 ```bash
 cd "$HOME/Data-cxfel/tr_sfx_preprocess_unified"
+```
+
+Or:
+
+```bash
+cd /path/to/tr_sfx_preprocess_unified
 ```
 
 On a local computer:
@@ -303,9 +324,9 @@ Run the following commands from the package root.
 
 ---
 
-## 2. Rebuild the environment
+### 2. Rebuild the environment
 
-### Load Conda on Mortimer
+#### Load Conda on HPC (Mortimer)
 
 When rebuilding the environment on the server, first source the base Conda installation:
 
@@ -313,7 +334,15 @@ When rebuilding the environment on the server, first source the base Conda insta
 source "$HOME/Data-cxfel/conda/etc/profile.d/conda.sh"
 ```
 
-### Create the environment
+Or:
+
+```bash
+source "/path/to/conda/etc/profile.d/conda.sh"
+```
+
+The Conda installation path above matches the current HPC (Mortimer) setup. If Conda is installed elsewhere, update the corresponding path in jobs/preprocess.sbatch before submitting a job.
+
+#### Create the environment
 
 ```bash
 conda env create -f environment.yml
@@ -332,7 +361,7 @@ conda env remove -n tr_sfx_preprocess
 conda env create -f environment.yml --solver libmamba
 ```
 
-### Activate and deactivate
+#### Activate and deactivate
 
 ```bash
 conda activate tr_sfx_preprocess
@@ -344,7 +373,7 @@ When finished:
 conda deactivate
 ```
 
-### Test the environment
+#### Test the environment
 
 Make sure the environment is active:
 
@@ -366,7 +395,7 @@ pip install -e . --no-deps
 
 ---
 
-## 3. Test the driver and configuration
+### 3. Test the driver and configuration
 
 Check that Python can access the driver and light configuration:
 
@@ -400,7 +429,7 @@ C1 C2 C3 C4 C5 C6 C7 C8 C9
 
 ---
 
-## 4. Add input files
+### 4. Add input files
 
 Copy the required files from the existing project input folders into this package's `inputs/` directory. `.stream` files are usually much larger than `.params` or `.xlsx` (tag-delay tables) files and may take longer to transfer.
 
@@ -410,7 +439,7 @@ For large files, `rsync` is recommended because it shows progress and can resume
 rsync -ah --info=progress2 /path/to/source.file inputs/
 ```
 
-### Dark data
+#### Dark data
 
 Example input files:
 
@@ -419,7 +448,7 @@ inputs/dark-clean-2024.params
 inputs/dark-clean-2024.stream
 ```
 
-Example commands on Mortimer:
+Example commands on HPC (Mortimer):
 
 ```bash
 cp "$HOME/Data-cxfel/tr_sfx_preprocess/inputs/dark-clean-2024.params" \
@@ -430,7 +459,9 @@ rsync -ah --info=progress2 \
    "$HOME/Data-cxfel/tr_sfx_preprocess_unified/inputs/"
 ```
 
-### Light data
+Alternatively, locate the required files and copy them into the `inputs/` directory.
+
+#### Light data
 
 Example input files:
 
@@ -440,7 +471,7 @@ inputs/upto1ps.params
 inputs/upto1ps.stream
 ```
 
-Example commands on Mortimer:
+Example commands on HPC (Mortimer):
 
 ```bash
 cp "$HOME/Data-cxfel/phytochrome2026/dataPhyto_reduction_light/inputs/tag_delay_all.xlsx" \
@@ -454,6 +485,8 @@ rsync -ah --info=progress2 \
    "$HOME/Data-cxfel/tr_sfx_preprocess_unified/inputs/"
 ```
 
+Alternatively, locate the required files and copy them into the `inputs/` directory.
+
 Confirm the files:
 
 ```bash
@@ -464,11 +497,11 @@ Large experimental inputs and generated outputs should not be committed to Git.
 
 ---
 
-## 5. Review the configuration
+### 5. Review the configuration
 
 Before running, edit the relevant YAML file and confirm the paths and parameters.
 
-### Light example
+#### Light example
 
 ```yaml
 dataset:
@@ -496,7 +529,7 @@ pipeline:
 
 The remaining light sections define the unit cell, wavelength, delay selection, random seed, DRL-mask settings, negative-value handling, and HKL averaging.
 
-### Dark example
+#### Dark example
 
 ```yaml
 dataset:
@@ -525,7 +558,7 @@ remove_negative_pixels: false
 
 ---
 
-## 6. Run a small local test
+### 6. Run a small local test
 
 Activate the environment and run an appropriately small dataset or restart configuration:
 
@@ -543,16 +576,16 @@ python driver.py \
     --config configs/dark_from_c7.yaml
 ```
 
-Do not run a full production dataset on the Mortimer submit/login node. Direct execution there should be limited to imports, `--list-steps`, tests, and small files.
+Do not run a full production dataset on the HPC (Mortimer) submit/login node. Direct execution there should be limited to imports, `--list-steps`, tests, and small files.
 
 ---
 
-## 7. Submit a full SLURM job
+### 7. Submit a full SLURM job
 
 From the package root:
 
 ```bash
-cd "$HOME/Data-cxfel/tr_sfx_preprocess_unified"
+cd "path/to/tr_sfx_preprocess_unified"
 ```
 
 Submit light data:
@@ -580,6 +613,16 @@ sbatch jobs/preprocess_dark_job01.sbatch configs/dark_full.yaml
 ```
 
 The shared SBATCH script uses the directory from which `sbatch` is submitted as the project root. Therefore, submit it from the package root unless `PROJECT_ROOT` is explicitly provided.
+
+Example:
+
+```bash
+export PROJECT_ROOT=/path/to/tr_sfx_preprocess_unified
+
+sbatch \
+    "$PROJECT_ROOT/jobs/preprocess.sbatch" \
+    "$PROJECT_ROOT/configs/light_full.yaml"
+```
 
 Check the queue:
 
@@ -613,7 +656,7 @@ A fixed `--nodelist` can be useful for debugging but may increase queue time.
 
 ---
 
-## Outputs files, HDF5 file organization and memory logs
+## Output files, HDF5 file organization and memory logs
 
 Output directories are defined in the YAML files, for example:
 
@@ -956,7 +999,7 @@ Do not reuse an intermediate file generated with different source data, symmetry
 
 ### Problem: input file not found
 
-Check absolute paths in the config:
+Check the configured input paths and confirm that the files exist:
 
 Example: light data
 
@@ -994,7 +1037,7 @@ If C8 reaches close to the requested memory, increase memory allocation in sbatc
 #SBATCH --mem=160G
 ```
 
-### Problem: (Light data) C11 result differs from MATLAB or other data resourses
+### Problem: Light data C11 result differs from MATLAB or other reference data
 
 Make sure the DRL mask settings match the MATLAB behavior. For current MATLAB-style pass-through behavior:
 

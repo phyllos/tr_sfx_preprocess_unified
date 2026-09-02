@@ -19,7 +19,7 @@ echo "Running on $(hostname)"
 echo "========================================"
 
 CONFIG_PATH="${1:?Usage: sbatch jobs/preprocess.sbatch configs/light_full.yaml}"
-PROJECT_ROOT="$HOME/Data-cxfel/tr_sfx_preprocess_unified"
+PROJECT_ROOT="${PROJECT_ROOT:-$SLURM_SUBMIT_DIR}"
 cd "$PROJECT_ROOT"
 
 source "$HOME/Data-cxfel/conda/etc/profile.d/conda.sh"
